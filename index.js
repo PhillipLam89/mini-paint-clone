@@ -1,10 +1,17 @@
 const canvas = document.getElementById("canvas")
 canvas.height = canvas.clientHeight
 canvas.width = canvas.clientWidth
-
-
 const ctx = canvas.getContext("2d")
-const erase = function() {
+const eraserButton = document.querySelector('#eraser')
+
+let eraseModeOn = false
+const erase = function(e) {
+  console.log(e.target)
+  eraseModeOn = true
+  e.target.disabled = true
+  if (e.target.disabled) {e.target.style.background = 'grey'}
+  e.target.textContent = 'Erase Mode On'
+  // e.target.disabled = eraseModeOn ? true : false
   ctx.globalCompositeOperation = 'destination-out'
   canvas.style.cursor = `url('cursor.cur'), auto`
   ctx.lineWidth = 55
@@ -20,7 +27,18 @@ let colors = document.querySelectorAll(".color")
 colors = Array.from(colors)
 colors.forEach(color => {
     color.addEventListener("click", () => {
+      eraseModeOn = false
+      eraserButton.disabled = false
+      eraserButton.style.background = 'black'
+      eraserButton.textContent = 'Click to use Eraser'
+      ctx.globalCompositeOperation = 'source-over'
+      canvas.style.cursor = `initial`
         ctx.strokeStyle = color.dataset.color
+        ctx.lineWidth = 5
+        for (const eachColor of colors) {
+          eachColor.style.border = 'none'
+        }
+        color.style.border = `5px solid purple`
     })
 })
 
@@ -65,5 +83,15 @@ window.addEventListener("mousemove", (e) => {
 
 const input = document.querySelector('#color-input > input')
 input.addEventListener('input', function() {
-  ctx.strokeStyle = this.value
+    ctx.strokeStyle = this.value
+    eraserButton.disabled = false
+    eraserButton.style.background = 'black'
+    eraserButton.textContent = `Click to use Eraser`
+    ctx.globalCompositeOperation = 'source-over'
+    canvas.style.cursor = `initial`
+    // ctx.strokeStyle = color.dataset.color
+    ctx.lineWidth = 5
+    for (const eachColor of colors) {
+    eachColor.style.border = 'none'
+  }
 })
