@@ -13,14 +13,15 @@ canvas {
 
     height: 10vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 1em;
     opacity: 1;
   /* display: none; */
     width: 100%;
     position: absolute;
-    top: 0
+    bottom: 10%;
+    margin: 0;
 }
 
 
@@ -29,11 +30,11 @@ canvas {
     width: 30px;
     background-color: blue;
     border-radius: 50%;
-    border: 3px solid rgb(214, 214, 214);
-    transition: transform .5s;
+    border: 1px solid rgb(214, 214, 214);
+    transition: transform .85s;
 }
 .color:hover{
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 .color:nth-child(1){
     background-color: #000;
@@ -64,11 +65,10 @@ button{
 }
 
 h1 {
-    color: red;
+    color: rgb(56, 14, 184);
     position: absolute;
-
     user-select: none;
-    top: 7%;
+    top: 3%;
     text-indent: 1em;
 }
 .color:hover, button:hover {
@@ -79,7 +79,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 1em;
-    top: 2.5%;
+    bottom: 10%;
     position: absolute;
     color: royalblue;
     font-size: 1.2rem;
@@ -92,5 +92,8 @@ h1 {
     top:4%;
     right: 10%;
     width: 20%;
-    background: palevioletred;
+    background-color: #000;
+}
+#eraser:disabled {
+    cursor: not-allowed;
 }
