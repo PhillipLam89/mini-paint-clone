@@ -10,22 +10,24 @@
       href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;800&display=swap"
       rel="stylesheet"/>
     <link rel="stylesheet" href="styles.css"/>
-    <title>MS Paint</title>
+    <title>MS Paint Mini-Clone</title>
   </head>
   <body>
       <div class="nav">
-        <!-- We will be accessing the data-clr in JavaScript -->
-        <div class="color" data-color="#000"></div>
-        <div class="color" data-color="#EF626C"></div>
-        <div class="color" data-color="#fdec03"></div>
-        <div class="color" data-color="#24d102"></div>
-        <div class="color" data-color="#2c47ce"></div>
-
+        <!-- We will be accessing the data-clr in JavaScript  -->
+        <p>Popular Colors</p>
+        <div class="color" data-color="orange">O</div>
+        <div class="color" data-color="#fdec03">Y</div>
+        <div class="color" data-color="#24d102">G</div>
+        <div class="color" data-color="blue">B</div>
+        <div class="color" data-color="pink">P</div>
+        <div class="color" data-color="red">R</div>
         <button class="clear">Clear</button>
         <button class="save">Save</button>
         <!-- <input type="file"> -->
     </div>
     <div id="color-input">More Colors   <input type="color"></div>
+    <div  id="background-color">Background Color <span>(Do this FIRST) </span><input id="bg-input" type="color"></div>
     <h1>Made by Phillip Lam</h1>
     <canvas id="canvas"></canvas>
     <button id="eraser" onclick="erase(event)">Click to use Eraser</button>
