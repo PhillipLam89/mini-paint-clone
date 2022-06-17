@@ -1,8 +1,14 @@
 const canvas = document.getElementById("canvas")
-canvas.height = canvas.clientHeight
+canvas.height = canvas.clientHeight * .65
 canvas.width = canvas.clientWidth
 const ctx = canvas.getContext("2d")
 const eraserButton = document.querySelector('#eraser')
+const rect = canvas.getBoundingClientRect();
+// window.onresize = function() {
+//   canvas.height = canvas.clientHeight
+// canvas.width = canvas.clientWidth
+// ctx.lineWidth = 5
+// }
 
 let eraseModeOn = false
 const erase = function(e) {
@@ -33,12 +39,12 @@ colors.forEach(color => {
       eraserButton.textContent = 'Click to use Eraser'
       ctx.globalCompositeOperation = 'source-over'
       canvas.style.cursor = `initial`
-        ctx.strokeStyle = color.dataset.color
-        ctx.lineWidth = 5
-        for (const eachColor of colors) {
-          eachColor.style.border = 'none'
-        }
-        color.style.border = `5px solid purple`
+      ctx.strokeStyle = color.dataset.color
+      ctx.lineWidth = 5
+      for (const eachColor of colors) {
+        eachColor.style.border = 'none'
+      }
+      color.style.border = `5px solid purple`
     })
 })
 
@@ -50,7 +56,7 @@ clearBtn.addEventListener("click", () => {
 // Saving drawing as image
 let saveBtn = document.querySelector(".save")
 saveBtn.addEventListener("click", () => {
-    let data = canvas.toDataURL("imag/png")
+    let data = canvas.toDataURL('image/png', 1) //1 will give best image quality
     let a = document.createElement("a")
     a.href = data
     // what ever name you specify here
@@ -59,8 +65,8 @@ saveBtn.addEventListener("click", () => {
     a.click() //simulates an HTML element being clicked!
 })
 
-window.addEventListener("mousedown", (e) => draw = true)
-window.addEventListener("mouseup", (e) => draw = false)
+window.addEventListener("mousedown", () => draw = true)
+window.addEventListener("mouseup", () => draw = false)
 
 window.addEventListener("mousemove", (e) => {
     if(prevX == null || prevY == null || !draw){
@@ -94,4 +100,11 @@ input.addEventListener('input', function() {
     for (const eachColor of colors) {
     eachColor.style.border = 'none'
   }
+})
+
+const bgColorInput = document.querySelector('#bg-input')
+bgColorInput.addEventListener('input', function() {
+  ctx.fillStyle = this.value
+
+  ctx.fillRect(0,0, canvas.width, canvas.height)
 })
