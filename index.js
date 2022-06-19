@@ -1,6 +1,6 @@
 const canvas = document.getElementById("canvas")
-canvas.height = canvas.clientHeight * .65
-canvas.width = canvas.clientWidth
+canvas.height = innerHeight * .65
+canvas.width = innerWidth
 const ctx = canvas.getContext("2d")
 const eraserButton = document.querySelector('#eraser')
 const rect = canvas.getBoundingClientRect();
@@ -9,8 +9,24 @@ const rect = canvas.getBoundingClientRect();
 // canvas.width = canvas.clientWidth
 // ctx.lineWidth = 5
 // }
-
+const imageInput = document.querySelector('#img-input')
 let eraseModeOn = false
+
+imageInput.addEventListener('change', function(e) {
+  const img = new Image(canvas.width, canvas.height)
+  console.log(img)
+
+  img.onload = displayUserImage
+  img.src = URL.createObjectURL(this.files[0])
+
+})
+
+function displayUserImage() {
+  console.log('thus img', this)
+  ctx.drawImage(this, 0,0, this.width, this.height)
+  console.log('ran')
+}
+
 const erase = function(e) {
   console.log(e.target)
   eraseModeOn = true
@@ -70,19 +86,18 @@ window.addEventListener("mouseup", () => draw = false)
 
 window.addEventListener("mousemove", (e) => {
     if(prevX == null || prevY == null || !draw){
-        prevX = e.clientX
-        prevY = e.clientY
+        prevX = e.pageX
+        prevY = e.pageY
         return
     }
 
-    let currentX = e.clientX
-    let currentY = e.clientY
+    let currentX = e.pageX
+    let currentY = e.pageY
 
     ctx.beginPath()
     ctx.moveTo(prevX, prevY)
     ctx.lineTo(currentX, currentY)
     ctx.stroke()
-
     prevX = currentX
     prevY = currentY
 })
